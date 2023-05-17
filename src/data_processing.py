@@ -1,7 +1,7 @@
 from datasets import load_dataset
 
 
-def filter_books(example):
+def _filter_books(example):
     return (
         example["product_category"] == "book"
         or example["product_category"] == "digital_ebook_purchase"
@@ -10,7 +10,7 @@ def filter_books(example):
 
 def load_data(dataset_name, language):
     english_dataset = load_dataset(dataset_name, language)
-    english_dataset = english_dataset.filter(filter_books)
+    english_dataset = english_dataset.filter(_filter_books)
     return english_dataset
 
 
