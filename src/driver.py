@@ -13,7 +13,6 @@ from transformers import (
 
 from argument_parser import parse_args
 from baseline import evaluate_baseline
-from compute_metrics import compute_metrics
 from data_processing import load_data, tokenize_data
 
 nltk.download("punkt")
