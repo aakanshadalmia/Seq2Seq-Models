@@ -11,16 +11,17 @@ from transformers import (
     pipeline,
 )
 
-from src.baseline import evaluate_baseline
-from src.compute_metrics import compute_metrics
-from src.data_processing import load_data, tokenize_data
+from argument_parser import parse_args
+from baseline import evaluate_baseline
+from compute_metrics import compute_metrics
+from data_processing import load_data, tokenize_data
 
 nltk.download("punkt")
 
 
-def train():
+def train(args):
     english_dataset = load_data("amazon_reviews_multi", "en")
-    model_card = "google/mt5-small"
+    model_card = args.model_card
     model = AutoModelForSeq2SeqLM.from_pretrained(model_card)
     tokenizer = AutoTokenizer.from_pretrained(model_card)
 
@@ -50,21 +51,21 @@ def train():
 
         return result
 
-    batch_size = 32
+    batch_size = args.batch_size
     logging_steps = len(tokenized_data["train"]) // batch_size
     model_name = model_card.split("/")[-1]
 
     training_arguments = Seq2SeqTrainingArguments(
-        output_dir=f"{model_name}-finetuned-amazon-en-es",
+        output_dir=f"{args.output_dir}/{model_name}-finetuned-amazon-en-es",
         evaluation_strategy="epoch",
         save_strategy="epoch",
         per_device_train_batch_size=batch_size,
         per_device_eval_batch_size=batch_size,
-        weight_decay=0.01,
-        save_total_limit=3,
+        weight_decay=args.weight_decay,
+        save_total_limit=args.save_total_limit,
         load_best_model_at_end=True,
-        learning_rate=5.6e-5,
-        num_train_epochs=3,
+        learning_rate=args.learning_rate,
+        num_train_epochs=args.num_train_epochs,
         predict_with_generate=True,
         logging_steps=logging_steps,
     )
@@ -103,4 +104,5 @@ def predict(best_model_checkpoint):
 
 
 if __name__ == "__main__":
-    train()
+    args = parse_args()
+    train(args)
