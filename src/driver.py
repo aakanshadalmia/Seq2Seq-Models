@@ -43,12 +43,13 @@ def train(args):
         decoded_labels = [
             "\n".join(sent_tokenize(label.strip())) for label in decoded_labels
         ]
-        rouge_score = evaluate.load("rouge")
         result = rouge_score.compute(
             predictions=decoded_preds, references=decoded_labels, use_stemmer=True
         )
-
+        result = {key: round(value * 100, 4) for key, value in result.items()}
         return result
+
+    rouge_score = evaluate.load("rouge")
 
     batch_size = args.batch_size
     logging_steps = len(tokenized_data["train"]) // batch_size
@@ -82,8 +83,8 @@ def train(args):
     trainer.train()
     performance = trainer.evaluate()
     score = evaluate_baseline(english_dataset["validation"], evaluate.load("rouge"))
-    print(f"Rouge scores for lead-3 baseline {score}")
-    print(f"Rouge scores for trained model {performance}")
+    print(f"\nRouge scores for lead-3 baseline {score}")
+    print(f"\nRouge scores for trained model {performance}")
 
     best_model_checkpoint = trainer.state.best_model_checkpoint
     print(f"Best model checkpoint: {best_model_checkpoint}")
@@ -104,4 +105,5 @@ def predict(best_model_checkpoint):
 
 if __name__ == "__main__":
     args = parse_args()
+    print("Arguments", args)
     train(args)
