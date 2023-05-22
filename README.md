@@ -23,14 +23,12 @@ This project showcases a **Text Summarizer** which as the name suggests, outputs
 
 **1. Install the required modules**
 
+  To get started, clone this repository and run the below command to make sure all required modules are installed.
+  
   ```
-  pip install datasets transformers transformers[sentencepiece]
-  pip install --upgrade accelerate
-  pip install rouge_score
-  pip install nltk
-  pip install evaluate
+  pip install -r requirements.txt
   ```
-
+  
 **2. Run `driver.py`**
   
   Commonly modified arguments have been configured in `argument_parser.py` to be passed as command line arguments.
