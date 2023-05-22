@@ -51,23 +51,21 @@ def train(args):
 
     rouge_score = evaluate.load("rouge")
 
-    batch_size = args.batch_size
-    logging_steps = len(tokenized_data["train"]) // batch_size
     model_name = model_card.split("/")[-1]
 
     training_arguments = Seq2SeqTrainingArguments(
-        output_dir=f"{args.output_dir}/{model_name}-finetuned-amazon-en-es",
+        output_dir=f"{args.output_dir}/{model_name}-finetuned-amazon-en",
+        seed=777,
         evaluation_strategy="epoch",
         save_strategy="epoch",
-        per_device_train_batch_size=batch_size,
-        per_device_eval_batch_size=batch_size,
+        per_device_train_batch_size=args.batch_size,
+        per_device_eval_batch_size=args.batch_size,
         weight_decay=args.weight_decay,
         save_total_limit=args.save_total_limit,
         load_best_model_at_end=True,
         learning_rate=args.learning_rate,
         num_train_epochs=args.num_train_epochs,
         predict_with_generate=True,
-        logging_steps=logging_steps,
     )
 
     trainer = Seq2SeqTrainer(
