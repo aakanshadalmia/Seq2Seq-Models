@@ -58,6 +58,7 @@ def train(args):
         seed=777,
         evaluation_strategy="epoch",
         save_strategy="epoch",
+        logging_strategy="epoch",
         per_device_train_batch_size=args.batch_size,
         per_device_eval_batch_size=args.batch_size,
         weight_decay=args.weight_decay,
