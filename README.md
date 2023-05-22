@@ -23,11 +23,13 @@ This project showcases a **Text Summarizer** which as the name suggests, outputs
 
 **1. Install the required modules**
 
-  pip install datasets transformers transformers[sentencepiece] <br>
-  pip install --upgrade accelerate <br>
-  pip install rouge_score <br>
-  pip install nltk <br>
+  ```
+  pip install datasets transformers transformers[sentencepiece]
+  pip install --upgrade accelerate
+  pip install rouge_score
+  pip install nltk
   pip install evaluate
+  ```
 
 **2. Run `driver.py`**
   
