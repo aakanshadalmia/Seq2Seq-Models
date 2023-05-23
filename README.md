@@ -19,7 +19,22 @@ This project showcases a **Text Summarizer** which as the name suggests, outputs
 
 <a href="https://huggingface.co/datasets/amazon_reviews_multi">Amazon Multilingual Reviews Dataset</a>
 
-## Steps to run the model
+## Model Description
+
+### Overview
+A multilingual Text-to-Text Transfer Transformer (mT5) model 
+has been used in this project. 
+
+### About the Model
+mT5 is basically a multilingual variant of T5 that has been pre-trained on a Common Crawl-based dataset covering 101 languages. The model architecture and training procedure that
+we use for mT5 closely follows that of T5.
+
+T5 is a pre-trained language model whose primary distinction is its use of a unified “text-to-text” format for all text-based NLP problems. This approach is natural for generative tasks where the task format requires the model to generate text conditioned on some input. 
+
+Given the sequence-to-sequence structure of this task format,
+T5 uses a basic encoder-decoder Transformer architecture as proposed by [Vaswani et al. (2017)](https://arxiv.org/pdf/1706.03762.pdf)
+
+## Steps to run the final model
 
 **1. Install the required modules**
 
