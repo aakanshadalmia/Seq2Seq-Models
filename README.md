@@ -1,5 +1,4 @@
-# Generate a title for a given review - using Seq2Seq Model
-
+# Summary Generation for reviews
 
 ## Introduction
 
@@ -11,9 +10,9 @@ Such models are best suited for tasks revolving around generating new sentences 
 
 This project showcases a **Text Summarizer** which as the name suggests, outputs a summary for a given text input. To take it up a notch, this particular summarizer has been fine tuned specifically to **generate a title for a given review**. 
 
-**Input :** A product review
+**Input :** Review for a product
 
-**Output :** Meaningful title for the review
+**Output :** Meaningful short summary for the review
 
 ## Dataset Used
 
